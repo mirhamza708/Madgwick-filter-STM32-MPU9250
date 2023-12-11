@@ -2,10 +2,7 @@
 This project implements the open source Madgwick filter on STM32 platforms using the MPU9250 IMU.
 The visual results of the filter are shown in the following short video. youtube link: https://youtu.be/vXpDsQi6GR4
 
-
-https://github.com/mirhamza708/Madgwick-filter-STM32-MPU9250/assets/55946600/25eeeb81-becc-441f-8b4b-8bd5b3dca93c
-
-
+https://github.com/mirhamza708/Madgwick-filter-STM32-MPU9250/assets/55946600/408ad318-664b-47c6-b4d4-a5a7510b032b
 
 There are multiple ways to estimate the orientation of an object in 3D space, the most easiest 
 way is to attach a gyroscope onto the object and measure the rotation rates of the object and integrate

@@ -29,7 +29,7 @@
 
 volatile float beta = 0.1f;								// 2 * proportional gain (Kp)
 volatile float q0 = 1.0f, q1 = 0.0f, q2 = 0.0f, q3 = 0.0f;	// quaternion of sensor frame relative to auxiliary frame
-
+float roll, pitch, yaw;
 //---------------------------------------------------------------------------------------------------
 // Function declarations
 
@@ -241,7 +241,14 @@ float invSqrt(float x) {
 	}
 }
 
-
+void computeAngles()
+{
+	roll = atan2f(q0*q1 + q2*q3, 0.5f - q1*q1 - q2*q2) * R2D;
+	pitch = asinf(-2.0f * (q1*q3 - q0*q2)) * R2D;
+	if (fabs(-2.0f * (q1*q3 - q0*q2)) >= 1)
+		pitch = copysign(M_PI / 2, -2.0f * (q1*q3 - q0*q2)) * R2D; // use 90 degrees if out of range
+	yaw = atan2f(q1*q2 + q0*q3, 0.5f - q2*q2 - q3*q3) * R2D;
+}
 //====================================================================================================
 // END OF CODE
 //====================================================================================================

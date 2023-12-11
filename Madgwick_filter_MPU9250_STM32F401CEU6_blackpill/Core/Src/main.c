@@ -38,7 +38,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define R2D 180.00f/3.141592f
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -55,18 +55,9 @@ TIM_HandleTypeDef htim2;
 
 /* USER CODE BEGIN PV */
 // Set structs for converting result from Quaternion to Euler angles
-typedef struct _Quaternion {
-    float w, x, y, z;
-}Quaternion;
 
-typedef struct _EulerAngles {
-    float roll_e, pitch_e, yaw_e;
-}EulerAngles;
 
-float roll, pitch, yaw;
 
-Quaternion qua;
-EulerAngles eul;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -82,35 +73,6 @@ static void MX_TIM2_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-void computeAngles()
-{
-	roll = atan2f(q0*q1 + q2*q3, 0.5f - q1*q1 - q2*q2) * R2D;
-	pitch = asinf(-2.0f * (q1*q3 - q0*q2)) * R2D;
-	if (fabs(-2.0f * (q1*q3 - q0*q2)) >= 1)
-		pitch = copysign(M_PI / 2, -2.0f * (q1*q3 - q0*q2)) * R2D; // use 90 degrees if out of range
-	yaw = atan2f(q1*q2 + q0*q3, 0.5f - q2*q2 - q3*q3) * R2D;
-//	anglesComputed = 1;
-}
-
-void i2c_scan()
-{
-	uint8_t i = 0, ret;
-
-	/*-[ I2C Bus Scanning ]-*/
-
-	for(i=1; i<128; i++)
-	{
-	  ret = HAL_I2C_IsDeviceReady(&hi2c1, (uint16_t)(i<<1), 3, 5);
-	  if (ret != HAL_OK) /* No ACK Received At That Address */
-	  {
-		  __NOP();
-	  }
-	  else if(ret == HAL_OK)
-	  {
-		  __NOP();
-	  }
-	}
-}
 /* USER CODE END 0 */
 
 /**

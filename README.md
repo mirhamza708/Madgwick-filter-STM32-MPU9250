@@ -8,7 +8,7 @@ There are multiple ways to estimate the orientation of an object in 3D space, th
 way is to attach a gyroscope onto the object and measure the rotation rates of the object and integrate
 those measurements every 0.01 seconds or so, this will give a crude orientation of the object which will
 keep drifting away from the actual orientation of the object. This is because the sensor data we are integrating
-is noisy and the noise is also integrated and thus causing drift. 
+is noisy and biased, which is also integrated and thus causing drift. 
 The second method is to use an accelerometer which will be a much better option because it has no drift component.
 the only two reasons the accelerometer alone can not be used are that the accelerometer readings are too much noisy and
 we cannot measure the yaw angle with just an accelerometer. If let's say we want to use it on a Quadcopter
